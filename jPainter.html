@@ -1,0 +1,148 @@
+<html>
+<head>
+<title>MyHtml.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="jquery-ui-1.11.0.custom/external/jquery/jquery-1.11.0.js"></script>
+<link rel="stylesheet" href="jquery-ui-1.11.0.custom/jquery-ui.css" />
+<link rel="stylesheet" href="jquery-ui-1.11.0.custom/jquery-ui.structure.css" />
+<link rel="stylesheet" href="colorpicker-master/jquery.colorpicker.css" />
+<link rel="stylesheet" href="jquery-ui-1.11.0.custom/jquery-ui.theme.css" />
+<script type="text/javascript" src="jquery-ui-1.11.0.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="js/anyLine.js"></script>
+<script type="text/javascript" src="colorpicker-master/jquery.colorpicker.js"></script>
+<script type="text/javascript" src="colorpicker-master/parts/jquery.ui.colorpicker-rgbslider.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
+<script type="text/javascript" src="js/canvas.js"></script>
+<style type="text/css">
+* {
+	font-family: '微软雅黑';
+	font-size:12px;
+}
+
+canvas {
+	border: 2px dashed gray;
+}
+
+.container_pencil{
+	cursor: url(images/PencilToolCursor.gif), pointer;
+}
+
+.container_eraser{
+	cursor: url(images/test.png), pointer;
+}
+
+.container_font{
+	cursor:crosshair;
+}
+.speed {
+	top: 15px;
+}
+
+.ui-selectmenu-text {
+	font-size: 12px;
+}
+
+</style>
+</head>
+
+<body oncontextmenu="javascript:return false">
+<div id="dialog" title="jPainter">	
+	<div style="font-size:14px;"> 
+	   <fieldset style="float:left;width:280px;">
+	        <legend>Tools</legend>
+				<div id="toolsOptions">
+					<input type="radio" id="tools_pencil" name="toolsOption" checked="checked"><label for="tools_pencil">Pencil</label> &nbsp;
+					<input type="radio" id="tools_eraser" name="toolsOption" ><label for="tools_eraser">Eraser</label> &nbsp;
+					<input type="radio" id="tools_trash" name="toolsOption"><label 	for="tools_trash">Empty</label>
+					<div style="border-top:1px dashed gray;margin-top:8px;padding-top:8px;"><span>
+						<button id="tools_save">save</button>&nbsp;&nbsp;&nbsp;
+						<button id="tools_undo">undo</button>&nbsp;&nbsp;&nbsp;
+						<button id="tools_redo">redo</button>
+					</span></div>
+				</div>
+
+			</fieldset>
+			<fieldset style="float:left;">
+				<legend>Shape</legend>
+				<div><span>
+					<input type="radio" id="tools_line" name="toolsOption"><label for="tools_line">Line</label>
+					<input type="radio" id="tools_rectangle" name="toolsOption"><label for="tools_rectangle">Rectangle</label>
+					<input type="radio" id="tools_circle" name="toolsOption"><label for="tools_circle">Font</label>
+				</span></div>
+			</fieldset>
+			<fieldset style="float:left;width:180px;">
+	        <legend>Line Settings</legend>
+	        <span style="float: left;margin-top: 6px;">width: </span>
+	             <select id="penWidth" >
+	                 <option value="1" selected>1px</option>
+	                 <option value="2">2px</option>
+	                 <option value="4">4px</option>
+	                 <option value="6">6px</option>
+	                 <option value="8">8px</option>
+	                 <option value="12">12px</option>
+	                 <option value="14">14px</option>
+	                 <option value="16">16px</option>
+	                 <option value="18">18px</option>
+	             </select>
+	            <div style="border-top:1px dashed gray;margin-top:8px;padding-top:8px;">
+	        <span>Border Color:<input id="colorpicker-popup" type="text"  value="000000" style="width: 72px;display:none; "></span>&nbsp;
+	        <span>Filling Color:<input id="colorpicker-popup2" type="text"  value="fe9810" style="width: 72px;display:none; "></span>
+	        </div>
+	     </fieldset>
+	    <fieldset style="float:left;width:160px;">
+	        <legend>Font Settings</legend>
+	        <span><span style="float: left;margin-top: 6px;">Font: </span>
+	        		<select id="fontSize"  >
+		                 <option value="8px" selected>8px</option>
+		                 <option value="10px">10px</option>
+		                 <option value="12px">12px</option>
+		                 <option value="14px">14px</option>
+		                 <option value="16px">16px</option>
+		                 <option value="18px">18px</option>
+		                 <option value="20px">20px</option>
+		                 <option value="22px">22px</option>
+		                 <option value="24px">24px</option>
+		                 <option value="26px">26px</option>
+		                 <option value="28px">28px</option>
+		                 <option value="30px">30px</option>
+		                 <option value="32px">32px</option>
+		                 <option value="34px">34px</option>
+		                 <option value="36px">36px</option>
+	             </select>
+	             </span>
+	             <br/>
+	        <span><span style="float: left;margin-top: 6px;">Font Style:</span>	        		
+	        		<select id="fontType" style="top:20px;" >
+		                 <option value="宋体" >SongTi</option>
+		                 <option value="微软雅黑">WeiRuanYaHei</option>
+		                 <option value="仿宋">FangSong</option>
+		                 <option value="Arial" selected>Arial</option>
+		                 <option value="Consolas">Consolas</option>
+	             </select>
+	        </span>
+	        <span style="font-weight:bold;"><input type="checkbox" id="boldOption" name="fontOption"><label for="boldOption">B</label></span>
+	        <span style="font-style: italic;"><input type="checkbox" id="italicOption" name="italicOption"><label for="italicOption">I</label></span>
+	     </fieldset>
+	     
+	     <div style="clear:both;"></div>
+	</div>
+   
+   <div style="background:white;position:relative;" id="container">
+     <div id="temp" style="border:1px solid gray;width:1px;height:1px;position:absolute;display:none;"></div>
+	
+	<canvas id="myCanvas" width="930" height="400" class="container_pencil">
+	  
+	</canvas>
+	</div>
+<span id="show" style="display:none;"></span>
+
+<div style="text-align:center; margin-top:20px;">
+		@Author:&nbsp;<b>luan louis </b> @Email:&nbsp;<b>louemail@qq.com </b><br/>
+</div>
+
+</div>	
+</body>
+</html>
